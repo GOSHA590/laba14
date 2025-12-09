@@ -1,0 +1,21 @@
+name: tariffs_app
+description: A new Flutter project.
+
+publish_to: "none"
+
+environment:
+  sdk: ">=2.19.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  file_picker: ^6.1.2 # или последняя версия
+  path: ^1.8.3
+  sqflite_common_ffi: ^2.3.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true

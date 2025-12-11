@@ -1,16 +1,100 @@
-# tariffs_app
+# Ticket Manager App
 
-A new Flutter project.
+Приложение для управления ж/д билетами, импортом/экспортом данных и проверкой корректности введённых билетов. Проект разработан на Flutter с использованием Sqflite для локальной базы данных.
 
-## Getting Started
+## Основные возможности
+	•	Добавление билетов с полной проверкой даты (учёт високосных лет и количества дней в месяце)
+	•	Проверка на повторяющиеся билеты при импорте
+	•	Управление тарифами и паспортными данными пассажиров
+	•	Импорт и экспорт базы данных в формате JSON
+	•	Хранение данных в локальной SQLite (через sqflite)
+	•	Приложение состоит из нескольких экранов (главный экран + окно импорта/экспорта)
 
-This project is a starting point for a Flutter application.
+⸻
 
-A few resources to get you started if this is your first Flutter project:
+## Структура проекта
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+/lib
+  /models
+    ticket.dart        – модель билета
+    passport.dart      – модель паспорта
+    tariff.dart        – модель тарифа
+  /services
+    database_service.dart – работа с SQLite
+    storage_service.dart  – импорт/экспорт JSON
+  main.dart              – запуск приложения
+  home_screen.dart       – главное окно
+  import_export_screen.dart – экран импорта/экспорта
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+⸻
+
+## Работа с базой данных
+
+Используется SQLite через sqflite.
+
+Основные таблицы:
+	•	passports — паспортные данные
+	•	tariffs — тарифы
+	•	tickets — билеты (с внешними ключами на таблицы паспортов и тарифов)
+
+Предотвращение дубликатов
+
+При импорте приложение проверяет, существует ли билет с такими же параметрами. Если да — он не добавляется в БД.
+
+⸻
+
+## Проверка корректности даты
+
+Реализованы проверки:
+	•	количество дней в месяце
+	•	правила високосных годов
+	•	запрет дат вроде 30 февраля
+
+⸻
+
+## Импорт и экспорт
+
+Поддерживается обмен данными в формате JSON:
+	•	экспорт всей базы билетов
+	•	импорт с проверкой валидности и дубликатов
+
+⸻
+
+## Использованные концепции ООП и программирования
+	•	Объекты в качестве аргументов функций (например, insertTicket(Ticket t))
+	•	Многофайловая структура проекта
+	•	Наследование (например, DiscountedTariff extends Tariff)
+	•	Приложение с несколькими окнами (Navigator.push)
+
+Множественное наследование и переопределение операторов в данном проекте не используются.
+
+⸻
+
+## Запуск проекта
+
+Установите зависимости:
+
+flutter pub get
+
+Запустите приложение:
+
+flutter run
+
+
+⸻
+
+## Платформы
+
+Работает на:
+	•	Android
+	•	iOS
+	•	Windows (при необходимости)
+  • MacOs
+  
+⸻
+
+## Автор
+
+Екимов Максим
+Приложение разработано в рамках учебного проекта на языке Flutter и с использованием базы данных.
